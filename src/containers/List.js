@@ -20,12 +20,17 @@ class List extends Component {
       text: ""
     }
     this.handleText = this.handleText.bind(this)
+    navigationOptions = {
+    title: 'Welcome',
+    };
   }
 
   handleText(){
     var newTask = this.state.text
     console.log(newTask)
     this.props.taskList(newTask)
+    const { navigate } = this.props.navigation
+    navigate('Next')
   }
 
   render() {
@@ -36,7 +41,7 @@ class List extends Component {
         <TouchableOpacity onPress={this.handleText} style={styles.button}>
           <Text style={styles.push} >Add Task</Text>
         </TouchableOpacity>
-        <SomethingElse />
+        
       </View>
     );
   }
