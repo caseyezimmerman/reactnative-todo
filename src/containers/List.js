@@ -6,8 +6,9 @@ import {
   View,
   TextInput,
   Button,
-  TouchableOpacity
-} from 'react-native';
+  Image,
+  TouchableOpacity,
+} from 'react-native'
 import AddTask from '../actions/AddTaskAction'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -17,7 +18,8 @@ class List extends Component {
   constructor(){
     super()
     this.state = {
-      text: ""
+      emailText: "",
+      passwordText: ""
     }
     this.handleText = this.handleText.bind(this)
     navigationOptions = {
@@ -26,9 +28,12 @@ class List extends Component {
   }
 
   handleText(){
-    var newTask = this.state.text
-    console.log(newTask)
-    this.props.taskList(newTask)
+    // var newTask = this.state.text
+    // console.log(newTask)
+    // this.props.taskList(newTask)
+    this.setState({
+
+    })
     const { navigate } = this.props.navigation
     navigate('Next')
   }
@@ -36,10 +41,24 @@ class List extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.head} > My To-do List</Text>
-        <TextInput style={styles.input} onChangeText={(text) => this.setState({text})}/>
+        <Image style={{alignSelf: 'center', marginTop: 30, marginBottom: 10}} source={require('../icon.png')} />
+        <Text style={styles.head} > TRACKTER </Text>
+        <TextInput
+          style={styles.phone}
+          placeholder = {"Phone Number"}
+          onChangeText={(emailText) => this.setState({emailText})}
+          value={this.state.emailText}
+        />
+        <TextInput
+          style={styles.password}
+          placeholder = {"Password"}
+          onChangeText={(passwordText) => this.setState({passwordText})}
+          value={this.state.passwordText}
+        />
+          <Text style={styles.rm} > Remember Me </Text>
+          <Text style={styles.fp} > Forgot Password? </Text>
         <TouchableOpacity onPress={this.handleText} style={styles.button}>
-          <Text style={styles.push} >Add Task</Text>
+          <Text style={styles.push} >Login</Text>
         </TouchableOpacity>
         
       </View>
@@ -47,46 +66,69 @@ class List extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({
-    taskList: AddTask
-  }, dispatch)
-}
+// function mapDispatchToProps(dispatch){
+//   return bindActionCreators({
+//     taskList: AddTask
+//   }, dispatch)
+// }
 
-export default connect(null, mapDispatchToProps)(List)
+// export default connect(null, mapDispatchToProps)(List)
+export default List
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:50,
-    borderBottomColor: 'black',
-    // width: '80%',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white'
   },
-  input: {
-    borderBottomColor:'black',
-    borderBottomWidth:1,
-    height: 30,
-    marginBottom:10
+  password: {
+    height: '8%',
+    width: '85%',
+    alignSelf: 'center',
+    borderRadius: 30,
+    borderColor: 'lightgrey',
+    borderWidth: 1,
+    paddingLeft: 10,
+    marginBottom: 10
   },
+  phone: {
+    height: '8%',
+    width: '85%',
+    alignSelf: 'center',
+    borderRadius: 30,
+    borderColor: 'lightgrey',
+    borderWidth: 1,
+    paddingLeft: 10,
+    marginBottom: 21
+  },
+  rm: {
+    fontSize: 15,
+    color: "#005580",
+    marginBottom: 30,
+    marginLeft: 30
+  },
+  fp: {
+    fontSize: 15,
+    color: "#005580",
+    position: 'absolute',
+    top: 320,
+    right: 20
+  }, 
   head: {
-    // flex: 1,
-    fontSize: 50,
-    justifyContent: 'center',
-    marginBottom: 30
+    fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 50
   },
   button: {
-    height:'6%',
-    width:'30%',
-    backgroundColor: "teal",
-    marginLeft:'35%',
-    borderRadius:20
+    height:'8%',
+    width:'85%',
+    backgroundColor: "#005580",
+    alignSelf:'center',
+    borderRadius:30
   },
   push:{
     fontSize:20,
-    marginLeft:20,
-    marginTop:4
+    marginTop: 10,
+    textAlign: 'center',
+    color: 'white'
   }
 });
